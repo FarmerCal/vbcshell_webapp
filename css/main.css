@@ -22,11 +22,12 @@ body {
  overflow: hidden;
 }
 
-h1 {
+.headding {
     padding-left: 1vw;
     height: 6%;
+    display: inline;
 }
-p {
+.description {
     padding-left: 1vw;
     height: 4%;
 }
