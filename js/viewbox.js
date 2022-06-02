@@ -16,7 +16,7 @@ var cy = (yt + yb) / 2;
 const LEN = 8;
 const moveHistory = new Array(LEN);
 
-// redraw function
+// redraw function for viewbox and cursor
 function redraw() {
 
     // clear canvas
@@ -42,7 +42,6 @@ function redraw() {
     ctx.stroke(); 
 
     // draw in cursor
-    ctx.strokeStyle = "rgb(0, 0, 0, 1.0)";
     ctx.fillStyle = "rgb(0, 0, 0, 1.0)";
     ctx.lineWidth = 1.0;
     ctx.beginPath();
@@ -56,7 +55,6 @@ function redraw() {
     console.log(((xr + xl) / 2) + 8, (yt + yb) / 2)
 }
 
-
 const html = document.getElementById('html');
 html.addEventListener('keydown', function(event) {
     console.log('keypressed: '+event.keyCode);
@@ -64,26 +62,36 @@ html.addEventListener('keydown', function(event) {
     if (event.keyCode == 78) { // n key pressed
         xr = (xl + xr) / 2;
         cx = (xr + xl) / 2;
-    } else if (event.keyCode == 69) {
+    } else if (event.keyCode == 69) { // e key pressed
         xl = (xl + xr) / 2;
         cx = (xr + xl) / 2;
-    }else if (event.keyCode == 73) {
+    }else if (event.keyCode == 73) { // i key pressed
         yb = (yb + yt) / 2;
         cy = (yt + yb) / 2;
-    }else if (event.keyCode == 79) {
+    }else if (event.keyCode == 79) { // o key pressed
         yt = (yb + yt) / 2;
         cy = (yt + yb) / 2;
-    } else if (event.keyCode == 32) {
+    }else if (event.keyCode == 76) { // l key pressed
+        cx = xl;
+    }else if (event.keyCode == 85) { // u key pressed
+        cx = xr;
+    }else if (event.keyCode == 89) { // y key pressed
+        cy = yt;
+    }else if (event.keyCode == 186) { // ; key pressed
+        cy = yb;
+
+    } else if (event.keyCode == 32) { // space pressed
         xl = 0;
         yt = 0;
         xr = viewbox.width;
         yb = viewbox.height;
         cx = (xr + xl) / 2;
         cy = (yt + yb) / 2;
+    } else if (event.keyCode == 65) { // a key pressed (cursor back to center of view box)
+        cx = (xr + xl) / 2;
+        cy = (yt + yb) / 2;
     }
-
     redraw();
-
 }, false);
 
 redraw()
