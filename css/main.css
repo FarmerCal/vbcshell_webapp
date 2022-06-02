@@ -18,23 +18,22 @@ body {
  height: 100%;
  width: 100%;
 
- border: 4px dashed rgb(144, 0, 255);
+ border: 4px dashed rgb(56, 59, 255);
  overflow: hidden;
 }
 
-.headding {
-    padding-left: 1vw;
-    height: 6%;
-    display: inline;
+header {
+    height: 10%;
+    padding-left: 15px;
 }
-.description {
-    padding-left: 1vw;
-    height: 4%;
+
+main {
+    height: 100%;
 }
 
 canvas {
     height: 90%;
     width: 100%;
 
-    border: 2px solid rgb(88, 133, 255);
+    border-top: 4px dashed rgb(56, 59, 255);
 }

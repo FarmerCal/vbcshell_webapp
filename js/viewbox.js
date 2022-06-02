@@ -9,18 +9,37 @@ var yt = 0;     // top side y component
 var xr = viewbox.width;    // right side x component
 var yb = viewbox.height;    // bottom side y component
 
-ctx.fillStyle = "rgb(3, 160, 256, 0.2)";
-ctx.strokeStyle = "rgb(3, 160, 256, 0.8)";
-ctx.fillRect(xl, yt, xr, yb);
-ctx.strokeRect(xl, yt, xr-xl, yb-yt);
-
 // redraw function
 function redraw() {
 
+    // clear canvas
     ctx.clearRect(0, 0, viewbox.width, viewbox.height);
+    
+    // set drawing params
+    ctx.fillStyle = "rgb(3, 160, 256, 0.1)";
+    ctx.strokeStyle = "rgb(3, 160, 256, 0.8)";
+    ctx.lineWidth = 0.5;
 
+    // draw and fill viewbox
     ctx.fillRect(xl, yt, xr-xl, yb-yt);
-    ctx.strokeRect(xl, yt, xr-xl, yb-yt);
+    ctx.strokeRect(xl, yt, xr - xl, yb - yt);
+    
+    // draw in crosshairs
+    ctx.beginPath();
+    ctx.moveTo(xl, (yb + yt) / 2);
+    ctx.lineTo(xr, (yb + yt) / 2);
+    ctx.stroke(); 
+
+    ctx.moveTo((xr + xl) / 2, yt);
+    ctx.lineTo((xr + xl) / 2, yb);
+    ctx.stroke(); 
+
+    // draw in cursor
+    ctx.strokeStyle = "rgb(0, 0, 0, 1.0)";
+    ctx.moveTo((xr + xl) / 2, (yt + yb) / 2);
+    ctx.lineTo(((xr + xl) / 2) + 4, (yt + yb) / 2);
+
+    console.log('redraw() called')
 }
 
 
