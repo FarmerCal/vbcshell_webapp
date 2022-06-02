@@ -23,9 +23,9 @@ function redraw() {
     ctx.clearRect(0, 0, viewbox.width, viewbox.height);
     
     // set drawing params
-    ctx.fillStyle = "rgb(3, 160, 256, 0.1)";
+    ctx.fillStyle = "rgb(3, 160, 256, 0.05)";
     ctx.strokeStyle = "rgb(3, 160, 256, 0.8)";
-    ctx.lineWidth = 0.5;
+    ctx.lineWidth = 0.4;
 
     // draw and fill viewbox
     ctx.fillRect(xl, yt, xr-xl, yb-yt);
@@ -61,15 +61,23 @@ html.addEventListener('keydown', function(event) {
 
     if (event.keyCode == 78) { // n key pressed
         xr = (xl + xr) / 2;
+        yb = (yb + yt) / 2;
         cx = (xr + xl) / 2;
+        cy = (yt + yb) / 2;
     } else if (event.keyCode == 69) { // e key pressed
         xl = (xl + xr) / 2;
-        cx = (xr + xl) / 2;
-    }else if (event.keyCode == 73) { // i key pressed
         yb = (yb + yt) / 2;
+        cx = (xr + xl) / 2;
         cy = (yt + yb) / 2;
-    }else if (event.keyCode == 79) { // o key pressed
+    } else if (event.keyCode == 73) { // i key pressed
+        xr = (xl + xr) / 2;
         yt = (yb + yt) / 2;
+        cx = (xr + xl) / 2;
+        cy = (yt + yb) / 2;
+    } else if (event.keyCode == 79) { // o key pressed
+        xl = (xl + xr) / 2;
+        yt = (yb + yt) / 2;
+        cx = (xr + xl) / 2;
         cy = (yt + yb) / 2;
     }else if (event.keyCode == 76) { // l key pressed
         cx = xl;
