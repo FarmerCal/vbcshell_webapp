@@ -1,6 +1,5 @@
 const viewbox = document.getElementById('viewbox');
 const ctx = viewbox.getContext('2d');
-
 viewbox.width = document.getElementById('viewbox').offsetWidth;
 viewbox.height = document.getElementById('viewbox').offsetHeight;
 
@@ -58,16 +57,23 @@ function redraw() {
     ctx.stroke();
 
     // draw in cursor
-    ctx.fillStyle = "rgb(0, 0, 0, 1.0)";
+    ctx.fillStyle = "rgb(255, 255, 255, 1.0)";
+    ctx.strokeStyle = "rgb(0, 0, 0, 1.0)";
+    ctx.lineWidth = 1.0;
+    ctx.setLineDash([0, 0]);
     ctx.beginPath();
     ctx.moveTo(cx, cy);
-    ctx.lineTo(cx + 12, cy + 4);
-    ctx.lineTo(cx + 4, cy + 12);
+    ctx.lineTo(cx + 12, cy + 12);
+    ctx.lineTo(cx + 6, cy + 12);
+    ctx.lineTo(cx + 8, cy + 16);
+    ctx.lineTo(cx + 6, cy + 17);
+    ctx.lineTo(cx + 4, cy + 13);
+    ctx.lineTo(cx, cy + 16.97);
     ctx.lineTo(cx, cy);
+    ctx.stroke();
     ctx.fill();
 
-    console.log('redraw() called!')
-    console.log(((xr + xl) / 2) + 8, (yt + yb) / 2)
+    console.log('redraw() called!');
 }
 
 const html = document.getElementById('html');
@@ -95,13 +101,13 @@ html.addEventListener('keydown', function(event) {
         cx = (xr + xl) / 2;
         cy = (yt + yb) / 2;
     }else if (event.keyCode == 76) { // l key pressed
-        cx = xl;
+        cx = cx - ((xr - xl) / 2);
     }else if (event.keyCode == 85) { // u key pressed
-        cx = xr;
+        cx = cx + ((xr - xl) / 2);
     }else if (event.keyCode == 89) { // y key pressed
-        cy = yt;
+        cy = cy - ((yb - yt) / 2);
     }else if (event.keyCode == 186) { // ; key pressed
-        cy = yb;
+        cy = cy + ((yb - yt) / 2);
 
     } else if (event.keyCode == 32) { // space pressed
         xl = 0;
