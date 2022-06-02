@@ -4,10 +4,17 @@ const ctx = viewbox.getContext('2d');
 viewbox.width = document.getElementById('viewbox').offsetWidth;
 viewbox.height = document.getElementById('viewbox').offsetHeight;
 
+// initialize variables
 var xl = 0;     // left side x component
 var yt = 0;     // top side y component
 var xr = viewbox.width;    // right side x component
 var yb = viewbox.height;    // bottom side y component
+
+var cx = (xr + xl) / 2; // set initial cursor position to center of view box
+var cy = (yt + yb) / 2;
+
+const LEN = 8;
+const moveHistory = new Array(LEN);
 
 // redraw function
 function redraw() {
@@ -39,10 +46,10 @@ function redraw() {
     ctx.fillStyle = "rgb(0, 0, 0, 1.0)";
     ctx.lineWidth = 1.0;
     ctx.beginPath();
-    ctx.moveTo((xr + xl) / 2, (yt + yb) / 2);
-    ctx.lineTo(((xr + xl) / 2) + 12, ((yt + yb) / 2) + 4);
-    ctx.lineTo(((xr + xl) / 2) + 4, ((yt + yb) / 2) + 12);
-    ctx.lineTo((xr + xl) / 2, (yt + yb) / 2);
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + 12, cy + 4);
+    ctx.lineTo(cx + 4, cy + 12);
+    ctx.lineTo(cx, cy);
     ctx.fill();
 
     console.log('redraw() called!')
@@ -54,19 +61,25 @@ const html = document.getElementById('html');
 html.addEventListener('keydown', function(event) {
     console.log('keypressed: '+event.keyCode);
 
-    if (event.keyCode == 78) {
-        xr = (xl+xr)/2;
+    if (event.keyCode == 78) { // n key pressed
+        xr = (xl + xr) / 2;
+        cx = (xr + xl) / 2;
     } else if (event.keyCode == 69) {
-        xl = (xl+xr)/2;
+        xl = (xl + xr) / 2;
+        cx = (xr + xl) / 2;
     }else if (event.keyCode == 73) {
-        yb = (yb+yt)/2;
+        yb = (yb + yt) / 2;
+        cy = (yt + yb) / 2;
     }else if (event.keyCode == 79) {
-        yt = (yb+yt)/2;
+        yt = (yb + yt) / 2;
+        cy = (yt + yb) / 2;
     } else if (event.keyCode == 32) {
-            xl = 0;
-            yt = 0;
-            xr = viewbox.width;
-            yb = viewbox.height;		  
+        xl = 0;
+        yt = 0;
+        xr = viewbox.width;
+        yb = viewbox.height;
+        cx = (xr + xl) / 2;
+        cy = (yt + yb) / 2;
     }
 
     redraw();
