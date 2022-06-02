@@ -36,10 +36,17 @@ function redraw() {
 
     // draw in cursor
     ctx.strokeStyle = "rgb(0, 0, 0, 1.0)";
+    ctx.fillStyle = "rgb(0, 0, 0, 1.0)";
+    ctx.lineWidth = 1.0;
+    ctx.beginPath();
     ctx.moveTo((xr + xl) / 2, (yt + yb) / 2);
-    ctx.lineTo(((xr + xl) / 2) + 4, (yt + yb) / 2);
+    ctx.lineTo(((xr + xl) / 2) + 12, ((yt + yb) / 2) + 4);
+    ctx.lineTo(((xr + xl) / 2) + 4, ((yt + yb) / 2) + 12);
+    ctx.lineTo((xr + xl) / 2, (yt + yb) / 2);
+    ctx.fill();
 
-    console.log('redraw() called')
+    console.log('redraw() called!')
+    console.log(((xr + xl) / 2) + 8, (yt + yb) / 2)
 }
 
 
