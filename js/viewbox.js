@@ -25,7 +25,8 @@ function redraw() {
     // set drawing params
     ctx.fillStyle = "rgb(3, 160, 256, 0.05)";
     ctx.strokeStyle = "rgb(3, 160, 256, 0.8)";
-    ctx.lineWidth = 0.4;
+    ctx.lineWidth = 0.8;
+    ctx.setLineDash([0, 0]);
 
     // draw and fill viewbox
     ctx.fillRect(xl, yt, xr-xl, yb-yt);
@@ -41,9 +42,23 @@ function redraw() {
     ctx.lineTo((xr + xl) / 2, yb);
     ctx.stroke(); 
 
+    // draw sub-crosshairs
+    ctx.strokeStyle = "rgb(3, 160, 256, 0.8)";
+    ctx.lineWidth = 0.4;
+    ctx.setLineDash([5, 5]);
+    ctx.beginPath();
+    ctx.moveTo(xl + (xr - xl) / 4, yt);
+    ctx.lineTo(xl + (xr - xl) / 4, yb);
+    ctx.moveTo(xl + (xr - xl) * (3 / 4), yt);
+    ctx.lineTo(xl + (xr - xl) * (3 / 4), yb);
+    ctx.moveTo(xl, yt + (yb - yt) / 4);
+    ctx.lineTo(xr, yt + (yb - yt) / 4);
+    ctx.moveTo(xl, yt + (yb - yt) * (3 / 4));
+    ctx.lineTo(xr, yt + (yb - yt) * (3 / 4));
+    ctx.stroke();
+
     // draw in cursor
     ctx.fillStyle = "rgb(0, 0, 0, 1.0)";
-    ctx.lineWidth = 1.0;
     ctx.beginPath();
     ctx.moveTo(cx, cy);
     ctx.lineTo(cx + 12, cy + 4);
