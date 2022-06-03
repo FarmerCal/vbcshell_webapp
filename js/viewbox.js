@@ -12,8 +12,7 @@ var yb = viewbox.height;    // bottom side y component
 var cx = (xr + xl) / 2; // set initial cursor position to center of view box
 var cy = (yt + yb) / 2;
 
-const LEN = 8;
-const moveHistory = new Array(LEN);
+var moveHistory = [];
 
 // redraw function for viewbox and cursor
 function redraw() {
@@ -85,21 +84,25 @@ html.addEventListener('keydown', function(event) {
         yb = (yb + yt) / 2;
         cx = (xr + xl) / 2;
         cy = (yt + yb) / 2;
+        moveHistory.push(1);
     } else if (event.keyCode == 69) { // e key pressed
         xl = (xl + xr) / 2;
         yb = (yb + yt) / 2;
         cx = (xr + xl) / 2;
         cy = (yt + yb) / 2;
+        moveHistory.push(2);
     } else if (event.keyCode == 73) { // i key pressed
         xr = (xl + xr) / 2;
         yt = (yb + yt) / 2;
         cx = (xr + xl) / 2;
         cy = (yt + yb) / 2;
+        moveHistory.push(3);
     } else if (event.keyCode == 79) { // o key pressed
         xl = (xl + xr) / 2;
         yt = (yb + yt) / 2;
         cx = (xr + xl) / 2;
         cy = (yt + yb) / 2;
+        moveHistory.push(4);
     }else if (event.keyCode == 76) { // l key pressed
         cx = cx - ((xr - xl) / 2);
     }else if (event.keyCode == 85) { // u key pressed
@@ -116,6 +119,38 @@ html.addEventListener('keydown', function(event) {
         yb = viewbox.height;
         cx = (xr + xl) / 2;
         cy = (yt + yb) / 2;
+        console.log(moveHistory);
+        moveHistory = [];
+    } else if (event.keyCode == 8) { // backspace key pressed
+        var lastMove = moveHistory.pop();
+        if (lastMove == 1) { // the players last move was the top left quadrant
+            xr = xr + (xr - xl);
+            yb = yb + (yb - yt);
+            cx = (xr + xl) / 2;
+            cy = (yt + yb) / 2;
+        } else if (lastMove == 2) { // the players last move was the top right quadrant
+            xl = xl - (xr - xl);
+            yb = yb + (yb - yt);
+            cx = (xr + xl) / 2;
+            cy = (yt + yb) / 2;
+        } else if (lastMove == 3) { // the players last move was the bottom left quadrant
+            xr = xr + (xr - xl);
+            yt = yt - (yb - yt);
+            cx = (xr + xl) / 2;
+            cy = (yt + yb) / 2;
+        } else if (lastMove == 4) { // the players last move was the bottom right quadrant
+            xl = xl - (xr - xl);
+            yt = yt - (yb - yt);
+            cx = (xr + xl) / 2;
+            cy = (yt + yb) / 2;
+        } else {
+            xl = 0;
+            yt = 0;
+            xr = viewbox.width;
+            yb = viewbox.height;
+            cx = (xr + xl) / 2;
+            cy = (yt + yb) / 2;
+        }
     } else if (event.keyCode == 65) { // a key pressed (cursor back to center of view box)
         cx = (xr + xl) / 2;
         cy = (yt + yb) / 2;
